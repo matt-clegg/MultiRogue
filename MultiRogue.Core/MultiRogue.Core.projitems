@@ -9,12 +9,32 @@
     <Import_RootNamespace>MultiRogue.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Content\" />
+    <Compile Include="$(MSBuildThisFileDirectory)Actions\ActionResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Actions\BaseAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Actions\MoveAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ai\CreatureAi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ai\PlayerAi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Creatures\Creature.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Creatures\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Energy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderers\Renderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\Scene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\TestScene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Turns\ITurnable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Turns\TurnManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Turns\TurnResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)World\Generation\BaseGenerator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)World\Generation\LevelGenerator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)World\Level.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)World\Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
- </Project>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+</Project>

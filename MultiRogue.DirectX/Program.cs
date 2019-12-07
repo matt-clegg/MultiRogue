@@ -1,21 +1,24 @@
-﻿using System;
+﻿using MultiRogue.Core;
+using System;
 
 namespace MultiRogue.DirectX
 {
 #if WINDOWS || LINUX
-    /// <summary>
-    /// The main class.
-    /// </summary>
     public static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
-                game.Run();
+            const int windowWidth = 640 * 2;
+            const int windowHeight = 384 * 2;
+            const int gameWidth = 640;
+            const int gameHeight = 384;
+            const string title = "Multi Rogue";
+
+            using (Engine engine = new Engine(windowWidth, windowHeight, gameWidth, gameHeight, title))
+            {
+                engine.Run();
+            }
         }
     }
 #endif
