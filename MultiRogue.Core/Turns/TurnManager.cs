@@ -48,15 +48,10 @@ namespace MultiRogue.Core.Turns
                 }
 
                 ActionResult result = PerformAction(action, turnable);
-                if (result.State != ActionResultState.Failure)
+                if (result.State == ActionResultState.Success)
                 {
-                    if (result.State == ActionResultState.Success)
-                    {
-                        turnable.FinishTurn();
-                        AdvanceIndex();
-                    }
-
-                    // else we are still running?
+                    turnable.FinishTurn();
+                    AdvanceIndex();
                 }
             }
 
@@ -65,11 +60,11 @@ namespace MultiRogue.Core.Turns
 
         private ActionResult PerformAction(BaseAction action, T turnable)
         {
-            ActionResult result = action.Perform(turnable);
+            ActionResult result = action.Perform(turnable, _turnResult);
             while (result.Alternative != null)
             {
                 action = result.Alternative;
-                result = action.Perform(turnable);
+                result = action.Perform(turnable, _turnResult);
             }
 
             return result;

@@ -10,9 +10,6 @@ namespace MultiRogue.Core.Ai
         {
         }
 
-        public override BaseAction DecideNextAction()
-        {
-            throw new NotImplementedException();
-        }
+        public override BaseAction DecideNextAction() => null;
     }
 }

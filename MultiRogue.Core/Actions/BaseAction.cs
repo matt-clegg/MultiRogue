@@ -4,7 +4,7 @@ namespace MultiRogue.Core.Actions
 {
     public abstract class BaseAction
     {
-        public abstract ActionResult Perform(ITurnable creature);
+        public abstract ActionResult Perform(ITurnable turnable, TurnResult result);
 
         protected virtual ActionResult Fail()
         {

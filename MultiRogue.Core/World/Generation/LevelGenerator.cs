@@ -23,8 +23,8 @@ namespace MultiRogue.Core.World.Generation
 
         protected override void DoGeneration()
         {
-            Tile wall = null;
-            Tile floor = null;
+            Tile wall = Tile.GetTile(0);
+            Tile floor = Tile.GetTile(1);
 
             for (int y = 0; y < _height; y++)
             {

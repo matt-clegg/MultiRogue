@@ -1,7 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MultiRogue.Core.Data;
+using MultiRogue.Core.Renderers;
 using Toolbox.Assets;
+using Toolbox.Input;
 
 namespace MultiRogue.Core
 {
@@ -25,6 +28,7 @@ namespace MultiRogue.Core
         private RenderTarget2D _renderTarget;
         private Rectangle _renderTargetDestination;
 
+        private readonly DelayedInputHandler _input = new DelayedInputHandler(20);
         private Game _game;
 
         public Engine(int windowWidth, int windowHeight, int gameWidth, int gameHeight, string title)
@@ -52,6 +56,8 @@ namespace MultiRogue.Core
 
             Content.RootDirectory = "Content";
 
+            _input.InputFireEvent += OnInputEvent;
+
             Window.Title = Title;
             Window.AllowUserResizing = false;
             IsMouseVisible = true;
@@ -63,16 +69,24 @@ namespace MultiRogue.Core
             base.Initialize();
         }
 
-
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Renderers.Draw.Initialize(_spriteBatch);
+
+            DataLoader.Load(Content, Assets);
 
             _game = new Game();
         }
 
+        private void OnInputEvent(object sender, KeyEventArgs e)
+        {
+            _game.Input(e.Key);
+        }
+
         protected override void Update(GameTime gameTime)
         {
+            _input.Update(Keyboard.GetState());
             _game.Update();
 
             base.Update(gameTime);

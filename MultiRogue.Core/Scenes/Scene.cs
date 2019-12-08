@@ -1,4 +1,5 @@
-﻿using MultiRogue.Core.Renderers;
+﻿using Microsoft.Xna.Framework.Input;
+using MultiRogue.Core.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace MultiRogue.Core.Scenes
             Game = game;
         }
 
+        public abstract void Input(Keys key);
         public abstract void Update();
 
         public virtual void Render()

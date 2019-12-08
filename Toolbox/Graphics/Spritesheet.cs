@@ -12,7 +12,7 @@ namespace Toolbox.Graphics
         public Sprite CutSprite(int x, int y, int width, int height, string name)
         {
             // TODO: INDEX TILES ON 8x8 GRID!!!
-            var bounds = new Rectangle(x * 8, y * 8, width, height);
+            var bounds = new Rectangle(x * width, y * height, width, height);
             return new Sprite(name, Texture, bounds);
         }
     }

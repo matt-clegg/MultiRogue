@@ -9,7 +9,6 @@
 
     public class ActionResult
     {
-        public static readonly ActionResult Running = new ActionResult(ActionResultState.Running);
         public static readonly ActionResult Success = new ActionResult(ActionResultState.Success);
         public static readonly ActionResult Failure = new ActionResult(ActionResultState.Failure);
 

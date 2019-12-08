@@ -4,6 +4,7 @@ using MultiRogue.Core.Turns;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Toolbox.Graphics;
 
 namespace MultiRogue.Core.Entities.Creatures
 {
@@ -14,6 +15,10 @@ namespace MultiRogue.Core.Entities.Creatures
         public CreatureAi Ai { get; set; }
 
         public int Speed { get; set; }
+
+        public Creature(Sprite sprite) : base(sprite)
+        {
+        }
 
         public bool CanTakeTurn()
         {
@@ -39,6 +44,7 @@ namespace MultiRogue.Core.Entities.Creatures
 
             _energy.Spend();
         }
+
 
         public BaseAction GetAction()
         {

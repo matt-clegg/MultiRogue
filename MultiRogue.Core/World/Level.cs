@@ -1,4 +1,6 @@
 ﻿using MultiRogue.Core.Entities.Creatures;
+using MultiRogue.Core.Events;
+using MultiRogue.Core.Turns;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,25 +16,44 @@ namespace MultiRogue.Core.World
 
         public IReadOnlyCollection<Creature> Creatures => _creatures;
 
+        private List<GameEvent> _events = new List<GameEvent>();
+        private readonly TurnManager<Creature> _turnManager;
+        private TurnResult _turnResult;
+
         public int Width => _tiles.Width;
         public int Height => _tiles.Height;
 
         public Level(Array2D<byte> tiles)
         {
             _tiles = tiles;
+
+            _turnManager = new TurnManager<Creature>(_creatures);
         }
 
         public void Update()
         {
-            foreach (Creature creature in Creatures)
+            if (_events.Count == 0)
             {
-                if (!creature.ShouldRemove)
-                {
-                    creature.Update();
-                }
+                _turnResult = _turnManager.Process();
+                _events.AddRange(_turnResult.Events);
             }
 
-            _creatures.RemoveAll(c => c.ShouldRemove);
+            if (_events.Count > 0)
+            {
+                List<GameEvent> toRemove = new List<GameEvent>();
+                foreach (GameEvent gameEvent in _events)
+                {
+                    if (gameEvent.Process())
+                    {
+                        toRemove.Add(gameEvent);
+                    }
+                }
+                
+                foreach(GameEvent removeEvent in toRemove)
+                {
+                    _events.Remove(removeEvent);
+                }
+            }
         }
 
         public void Add(Creature creature, int x, int y)
@@ -59,6 +80,11 @@ namespace MultiRogue.Core.World
             }
 
             return null;
+        }
+
+        public Tile GetTile(int x, int y)
+        {
+            return Tile.GetTile(_tiles[x, y]);
         }
     }
 }

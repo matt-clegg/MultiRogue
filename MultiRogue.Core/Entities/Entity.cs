@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Toolbox.Graphics;
 
 namespace MultiRogue.Core.Entities
 {
@@ -15,7 +16,14 @@ namespace MultiRogue.Core.Entities
 
         public Level Level { get; private set; }
 
+        public virtual Sprite Sprite { get; }
+
         public bool ShouldRemove { get; set; }
+
+        public Entity(Sprite sprite)
+        {
+            Sprite = sprite;
+        }
 
         public void Init(Level level)
         {
